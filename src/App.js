@@ -3,6 +3,7 @@ import { ApolloProvider } from "react-apollo";
 import client from './client';
 import { Query, Mutation } from "react-apollo";
 import gql from "graphql-tag";
+import LocalStorage from 'util/LocalStorage'
 import './App.css';
 
 export const GOALS_QUERY = gql`
@@ -39,15 +40,22 @@ class App extends Component {
   nameInput = React.createRef();
   passwordInput = React.createRef();
 
+  componentDidMount() {
+    const rememberToken = LocalStorage.getItem('rememberToken')
+    const userId = LocalStorage.getItem('userId')
+
+    if (rememberToken && userId) this.setState({ rememberToken, userId })
+  }
+
   render() {
-    if (this.state.token) {
+    if (this.state.rememberToken) {
       return (
         <div>
-          <p>{this.state.token}</p>
+          <p>{this.state.rememberToken}</p>
           <p>{this.state.userId}</p>
 
           <ApolloProvider client={client}>
-            <Query query={GOALS_QUERY} variables={{ auth: { rememberToken: this.state.token, userId: parseInt(this.state.userId) } }}>
+            <Query query={GOALS_QUERY} variables={{ auth: { rememberToken: this.state.rememberToken, userId: parseInt(this.state.userId) } }}>
               {({ data, loading, error }) => {
                 if (loading) return <p>LOADING</p>;
                 if (error) return <p>ERROR</p>;
@@ -66,9 +74,12 @@ class App extends Component {
             (createSession, { data }) => {
               if (data) {
                 this.setState({
-                  token: data.createSession.token,
+                  rememberToken: data.createSession.token,
                   userId: data.createSession.user.id,
                 })
+
+                LocalStorage.setItem('rememberToken', data.createSession.token)
+                LocalStorage.setItem('userId', data.createSession.user.id)
               }
 
               return (
