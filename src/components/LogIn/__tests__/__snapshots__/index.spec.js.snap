@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LogIn snapshot renders the component correctly 1`] = `
+<LoadingAndErrorHandler
+  loading={false}
+>
+  <form>
+    <input
+      className="name"
+    />
+    <input
+      className="password"
+      type="password"
+    />
+    <button
+      onClick={[Function]}
+    >
+      Log In
+    </button>
+  </form>
+</LoadingAndErrorHandler>
+`;

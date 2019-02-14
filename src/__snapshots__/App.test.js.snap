@@ -1,84 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Card renders the component correctly 1`] = `
-<ApolloProvider
-  client={
-    ApolloClient {
-      "cache": InMemoryCache {
-        "addTypename": false,
-        "config": Object {
-          "addTypename": false,
-          "dataIdFromObject": [Function],
-          "fragmentMatcher": HeuristicFragmentMatcher {},
-          "storeFactory": [Function],
-        },
-        "data": ObjectCache {
-          "data": Object {},
-        },
-        "optimistic": Array [],
-        "silenceBroadcast": false,
-        "typenameDocumentCache": WeakMap {},
-        "watches": Array [],
-      },
-      "defaultOptions": Object {},
-      "disableNetworkFetches": false,
-      "link": ApolloLink {
-        "request": [Function],
-      },
-      "mutate": [Function],
-      "query": [Function],
-      "queryDeduplication": true,
-      "reFetchObservableQueries": [Function],
-      "resetStore": [Function],
-      "resetStoreCallbacks": Array [],
-      "ssrMode": false,
-      "store": DataStore {
-        "cache": InMemoryCache {
-          "addTypename": false,
-          "config": Object {
-            "addTypename": false,
-            "dataIdFromObject": [Function],
-            "fragmentMatcher": HeuristicFragmentMatcher {},
-            "storeFactory": [Function],
-          },
-          "data": ObjectCache {
-            "data": Object {},
-          },
-          "optimistic": Array [],
-          "silenceBroadcast": false,
-          "typenameDocumentCache": WeakMap {},
-          "watches": Array [],
-        },
-      },
-      "version": "2.3.5",
-      "watchQuery": [Function],
-    }
-  }
->
-  <App />
-</ApolloProvider>
-`;
-
 exports[`Foo renders the component correctly 1`] = `
 <ApolloProvider
   client={
     ApolloClient {
       "cache": InMemoryCache {
         "addTypename": false,
+        "cacheKeyRoot": CacheKeyNode {
+          "children": null,
+          "key": null,
+        },
         "config": Object {
           "addTypename": false,
           "dataIdFromObject": [Function],
           "fragmentMatcher": HeuristicFragmentMatcher {},
-          "storeFactory": [Function],
+          "resultCaching": true,
         },
-        "data": ObjectCache {
+        "data": DepTrackingCache {
           "data": Object {},
+          "depend": [Function],
         },
-        "optimistic": Array [],
+        "maybeBroadcastWatch": [Function],
+        "optimisticData": DepTrackingCache {
+          "data": Object {},
+          "depend": [Function],
+        },
         "silenceBroadcast": false,
-        "typenameDocumentCache": WeakMap {},
-        "watches": Array [],
+        "storeReader": StoreReader {
+          "cacheKeyRoot": CacheKeyNode {
+            "children": null,
+            "key": null,
+          },
+          "executeSelectionSet": [Function],
+          "executeStoreQuery": [Function],
+        },
+        "storeWriter": StoreWriter {},
+        "typenameDocumentCache": Map {},
+        "watches": Set {},
       },
+      "clearStoreCallbacks": Array [],
+      "clientAwareness": Object {},
       "defaultOptions": Object {},
       "disableNetworkFetches": false,
       "link": ApolloLink {
@@ -94,22 +55,40 @@ exports[`Foo renders the component correctly 1`] = `
       "store": DataStore {
         "cache": InMemoryCache {
           "addTypename": false,
+          "cacheKeyRoot": CacheKeyNode {
+            "children": null,
+            "key": null,
+          },
           "config": Object {
             "addTypename": false,
             "dataIdFromObject": [Function],
             "fragmentMatcher": HeuristicFragmentMatcher {},
-            "storeFactory": [Function],
+            "resultCaching": true,
           },
-          "data": ObjectCache {
+          "data": DepTrackingCache {
             "data": Object {},
+            "depend": [Function],
           },
-          "optimistic": Array [],
+          "maybeBroadcastWatch": [Function],
+          "optimisticData": DepTrackingCache {
+            "data": Object {},
+            "depend": [Function],
+          },
           "silenceBroadcast": false,
-          "typenameDocumentCache": WeakMap {},
-          "watches": Array [],
+          "storeReader": StoreReader {
+            "cacheKeyRoot": CacheKeyNode {
+              "children": null,
+              "key": null,
+            },
+            "executeSelectionSet": [Function],
+            "executeStoreQuery": [Function],
+          },
+          "storeWriter": StoreWriter {},
+          "typenameDocumentCache": Map {},
+          "watches": Set {},
         },
       },
-      "version": "2.3.5",
+      "version": "2.4.12",
       "watchQuery": [Function],
     }
   }
