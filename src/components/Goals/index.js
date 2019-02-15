@@ -9,7 +9,7 @@ import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import GoalsModel from 'models/Goals';
 import AuthContext from 'components/context/Auth';
 
-const GOALS_QUERY = gql`
+export const GOALS_QUERY = gql`
   query Goals($auth: AuthInput!){
     goals(auth: $auth) {
       id
@@ -56,14 +56,17 @@ class GoalsWrapped extends Component {
       <AuthContext.Consumer>
         {auth => (
           <ApolloProvider client={client}>
-            <Query query={GOALS_QUERY} variables={{ auth: auth }}>
-              {({ data, loading, error }) => (
-                <Goals
+            <Query query={GOALS_QUERY} variables={{ auth }}>
+              {({ data, loading, error }) => {
+                if (error) {
+                  console.log(error.message)
+                }
+                return (<Goals
                   loading={loading}
                   error={error}
                   goals={data && data.goals || []}
-                />
-              )}
+                />)
+              }}
             </Query>
           </ApolloProvider>
         )}

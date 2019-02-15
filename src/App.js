@@ -6,6 +6,7 @@ import gql from "graphql-tag";
 import LocalStorage from 'util/LocalStorage';
 import LogIn from 'components/LogIn';
 import Goals from 'components/Goals';
+import CreateGoal from 'components/CreateGoal';
 import AuthContext from 'components/context/Auth';
 
 export const GOALS_QUERY = gql`
@@ -45,6 +46,7 @@ class App extends Component {
       return (
         <AuthContext.Provider value={this.auth()}>
           <Goals />
+          <CreateGoal />
         </AuthContext.Provider>
       )
     }

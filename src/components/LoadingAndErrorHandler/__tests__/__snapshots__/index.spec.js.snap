@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoadingAndErrorHandler error renders the loading message 1`] = `
+<div>
+  <h2>
+    Error
+  </h2>
+  <p>
+    foobar
+  </p>
+</div>
+`;
+
+exports[`LoadingAndErrorHandler loading renders the loading message 1`] = `
+<p>
+  Loading...
+</p>
+`;
+
+exports[`LoadingAndErrorHandler not loading and no error renders the child component 1`] = `"foo"`;

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Goals snapshot renders the component correctly 1`] = `
+<LoadingAndErrorHandler
+  loading={false}
+>
+  <div>
+    <p>
+      Name: 
+      Goal
+    </p>
+    <p>
+      ID: 
+      1
+    </p>
+    <p>
+      Due Date: 
+    </p>
+  </div>
+</LoadingAndErrorHandler>
+`;
