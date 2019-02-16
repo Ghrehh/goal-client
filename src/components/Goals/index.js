@@ -5,9 +5,10 @@ import client from 'client';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import LocalStorage from 'util/LocalStorage'
-import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import GoalsModel from 'models/Goals';
 import AuthContext from 'components/context/Auth';
+import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
+import Completion from './Completion';
 
 export const GOALS_QUERY = gql`
   query Goals($auth: AuthInput!){
@@ -28,7 +29,7 @@ class Goals extends Component {
     return (
       <div key={goal.id}>
         <p>{goal.name}</p>
-        <p>Completed: {String(!!goal.latestCompletion)}</p>
+        <Completion goal={goal} />
         <br />
       </div>
     )
