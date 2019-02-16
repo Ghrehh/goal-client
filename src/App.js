@@ -1,23 +1,9 @@
 import React, { Component } from 'react';
-import { ApolloProvider } from "react-apollo";
-import client from './client';
-import { Query, Mutation } from "react-apollo";
-import gql from "graphql-tag";
 import LocalStorage from 'util/LocalStorage';
 import LogIn from 'components/LogIn';
 import Goals from 'components/Goals';
 import CreateGoal from 'components/CreateGoal';
 import AuthContext from 'components/context/Auth';
-
-export const GOALS_QUERY = gql`
-  query Goals($auth: AuthInput!){
-    goals(auth: $auth) {
-      id
-      name
-      dueDate
-    }
-  }
-`;
 
 class App extends Component {
   state = {}
