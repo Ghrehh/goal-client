@@ -9,6 +9,7 @@ import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import AuthModel from 'models/Auth';
 import GoalModel from 'models/Goal';
+import { GOALS_QUERY } from 'components/Goals';
 
 const CREATE_COMPLETION_MUTATION = gql`
   mutation CreateCompletion(
@@ -82,12 +83,40 @@ Completion.propTypes = {
 export { Completion };
 
 class CompletionWrapped extends Component {
+  updateCreateCompletion = ({ cache, completion, auth }) => {
+    const { goals } = cache.readQuery({
+      query: GOALS_QUERY,
+      variables: { auth }
+    });
+
+    goals.forEach((goal, index) => {
+      if (goal.id == this.props.goal.id) {
+        goals[index].latestCompletion = completion
+      }
+    });
+
+    cache.writeQuery({
+      query: GOALS_QUERY,
+      variables: { auth },
+      data: { goals },
+    });
+  }
+
   render() {
     return (
       <AuthContext.Consumer>
         {auth => (
           <ApolloProvider client={client}>
-            <Mutation mutation={CREATE_COMPLETION_MUTATION}>
+            <Mutation
+              mutation={CREATE_COMPLETION_MUTATION}
+              update={
+                (cache, { data }) => this.updateCreateCompletion({
+                  cache,
+                  completion: data.createCompletion.completion,
+                  auth
+                })
+              }
+            >
               {
                 (createCompletion, create) => (
                   <Completion

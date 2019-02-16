@@ -8,10 +8,14 @@ exports[`Goals snapshot renders the component correctly 1`] = `
     <p>
       Goal
     </p>
-    <p>
-      Completed: 
-      false
-    </p>
+    <CompletionWrapped
+      goal={
+        Object {
+          "id": 1,
+          "name": "Goal",
+        }
+      }
+    />
     <br />
   </div>
 </LoadingAndErrorHandler>
