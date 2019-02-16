@@ -6,9 +6,10 @@ import gql from "graphql-tag";
 import client from 'client';
 import LocalStorage from 'util/LocalStorage'
 import AuthContext from 'components/context/Auth';
+import SelectedDateContext from 'components/context/SelectedDate';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import AuthModel from 'models/Auth';
-import GoalModel from 'models/Goal';
+import GoalModel, { goalCompletionForDate } from 'models/Goal';
 import { GOALS_QUERY } from 'components/Goals';
 
 const CREATE_COMPLETION_MUTATION = gql`
@@ -43,14 +44,19 @@ const DELETE_COMPLETION_MUTATION = gql`
 `;
 
 class Completion extends Component {
-  checked = () => !!this.props.goal.completions.length > 0
+  completion = () => goalCompletionForDate({
+    goal: this.props.goal, 
+    dateString: this.props.selectedDate
+  })
+
+  checked = () => !!this.completion()
 
   toggle = () => {
     if (!this.checked()) {
       return this.props.createCompletion({
         variables: {
           auth: this.props.auth,
-          completedAt: new Date().toISOString(),
+          completedAt: new Date(this.props.selectedDate).toISOString(),
           goalId: this.props.goal.id
         }
       });
@@ -59,7 +65,7 @@ class Completion extends Component {
     this.props.deleteCompletion({
       variables: {
         auth: this.props.auth,
-        completionId: this.props.goal.completions[0].id
+        completionId: this.completion().id
       }
     });
   }
@@ -91,7 +97,8 @@ Completion.propTypes = {
   error: PropTypes.object,
   auth: AuthModel.isRequired,
   createCompletion: PropTypes.func.isRequired,
-  goal: GoalModel.isRequired
+  goal: GoalModel.isRequired,
+  selectedDate: PropTypes.string.isRequired
 }
 
 export { Completion };
@@ -99,32 +106,37 @@ export { Completion };
 class CompletionWrapped extends Component {
   render() {
     return (
-      <AuthContext.Consumer>
-        {auth => (
-          <ApolloProvider client={client}>
-            <Mutation
-              mutation={CREATE_COMPLETION_MUTATION}
-            >
-              {(createCompletion, create) => (
+      <SelectedDateContext.Consumer>
+        {selectedDate => (
+          <AuthContext.Consumer>
+            {auth => (
+              <ApolloProvider client={client}>
                 <Mutation
-                  mutation={DELETE_COMPLETION_MUTATION}
+                  mutation={CREATE_COMPLETION_MUTATION}
                 >
-                  {(deleteCompletion, remove) => (
-                    <Completion
-                      loading={create.loading || remove.loading}
-                      error={create.error || remove.error}
-                      createCompletion={createCompletion}
-                      deleteCompletion={deleteCompletion}
-                      auth={auth}
-                      goal={this.props.goal}
-                    />
+                  {(createCompletion, create) => (
+                    <Mutation
+                      mutation={DELETE_COMPLETION_MUTATION}
+                    >
+                      {(deleteCompletion, remove) => (
+                        <Completion
+                          loading={create.loading || remove.loading}
+                          error={create.error || remove.error}
+                          createCompletion={createCompletion}
+                          deleteCompletion={deleteCompletion}
+                          auth={auth}
+                          goal={this.props.goal}
+                          selectedDate={selectedDate}
+                        />
+                      )}
+                    </Mutation>
                   )}
                 </Mutation>
-              )}
-            </Mutation>
-          </ApolloProvider>
+              </ApolloProvider>
+            )}
+          </AuthContext.Consumer>
         )}
-      </AuthContext.Consumer>
+    </SelectedDateContext.Consumer>
     );
   }
 }

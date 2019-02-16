@@ -8,3 +8,19 @@ export default PropTypes.shape({
   latestCompletion: CompletionModel,
   completions: CompletionsModel
 })
+
+export const goalCompletionForDate = ({ goal, dateString }) => {
+  const date = new Date(dateString);
+  let foundCompletion;
+
+  goal.completions.forEach(completion => {
+    const completionDate = new Date(completion.completedAt)
+    if (
+      completionDate.getFullYear() === date.getFullYear() &&
+      completionDate.getMonth() === date.getMonth() &&
+      completionDate.getDate() === date.getDate()
+    ) { foundCompletion = completion }
+  });
+
+  return foundCompletion
+};
