@@ -15,21 +15,17 @@ export const GOALS_QUERY = gql`
       id
       name
       dueDate
-      latestCompletion {
-        id
-        completedAt
-      }
     }
   }
 `;
 
-class Goals extends Component {
+class Completions extends Component {
   renderGoal(goal) {
     return (
       <div key={goal.id}>
-        <p>{goal.name}</p>
-        <p>Completed: {String(!!goal.latestCompletion)}</p>
-        <br />
+        <p>Name: {goal.name}</p>
+        <p>ID: {goal.id}</p>
+        <p>Due Date: {goal.dueDate}</p>
       </div>
     )
   }

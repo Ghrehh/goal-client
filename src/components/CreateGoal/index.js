@@ -17,6 +17,10 @@ const CREATE_GOAL_MUTATION = gql`
         id
         name
         dueDate
+        latestCompletion {
+          id
+          completedAt
+        }
       }
     }
   }
