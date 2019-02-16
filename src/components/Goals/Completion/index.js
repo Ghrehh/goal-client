@@ -18,9 +18,12 @@ const CREATE_COMPLETION_MUTATION = gql`
     $completedAt: ISO8601DateTime!
   ){
     createCompletion(auth: $auth, goalId: $goalId, completedAt: $completedAt) {
-      completion {
+      goals {
         id
-        completedAt
+        latestCompletion {
+          completedAt
+          id
+        }
       }
     }
   }
@@ -40,12 +43,23 @@ const DELETE_COMPLETION_MUTATION = gql`
 `;
 
 class Completion extends Component {
+  checked = () => !!this.props.goal.latestCompletion
+
   toggle = () => {
-    this.props.createCompletion({
+    if (!this.checked()) {
+      return this.props.createCompletion({
+        variables: {
+          auth: this.props.auth,
+          completedAt: new Date().toISOString(),
+          goalId: this.props.goal.id
+        }
+      });
+    }
+
+    this.props.deleteCompletion({
       variables: {
         auth: this.props.auth,
-        completedAt: new Date().toISOString(),
-        goalId: this.props.goal.id
+        completionId: this.props.goal.latestCompletion.id
       }
     });
   }
@@ -83,25 +97,6 @@ Completion.propTypes = {
 export { Completion };
 
 class CompletionWrapped extends Component {
-  updateCreateCompletion = ({ cache, completion, auth }) => {
-    const { goals } = cache.readQuery({
-      query: GOALS_QUERY,
-      variables: { auth }
-    });
-
-    goals.forEach((goal, index) => {
-      if (goal.id == this.props.goal.id) {
-        goals[index].latestCompletion = completion
-      }
-    });
-
-    cache.writeQuery({
-      query: GOALS_QUERY,
-      variables: { auth },
-      data: { goals },
-    });
-  }
-
   render() {
     return (
       <AuthContext.Consumer>
@@ -109,25 +104,23 @@ class CompletionWrapped extends Component {
           <ApolloProvider client={client}>
             <Mutation
               mutation={CREATE_COMPLETION_MUTATION}
-              update={
-                (cache, { data }) => this.updateCreateCompletion({
-                  cache,
-                  completion: data.createCompletion.completion,
-                  auth
-                })
-              }
             >
-              {
-                (createCompletion, create) => (
-                  <Completion
-                    loading={create.loading}
-                    error={create.error}
-                    createCompletion={createCompletion}
-                    auth={auth}
-                    goal={this.props.goal}
-                  />
-                )
-              }
+              {(createCompletion, create) => (
+                <Mutation
+                  mutation={DELETE_COMPLETION_MUTATION}
+                >
+                  {(deleteCompletion, remove) => (
+                    <Completion
+                      loading={create.loading || remove.loading}
+                      error={create.error || remove.error}
+                      createCompletion={createCompletion}
+                      deleteCompletion={deleteCompletion}
+                      auth={auth}
+                      goal={this.props.goal}
+                    />
+                  )}
+                </Mutation>
+              )}
             </Mutation>
           </ApolloProvider>
         )}
