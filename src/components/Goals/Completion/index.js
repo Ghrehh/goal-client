@@ -20,7 +20,7 @@ const CREATE_COMPLETION_MUTATION = gql`
     createCompletion(auth: $auth, goalId: $goalId, completedAt: $completedAt) {
       goals {
         id
-        latestCompletion {
+        completions {
           completedAt
           id
         }
@@ -34,7 +34,7 @@ const DELETE_COMPLETION_MUTATION = gql`
     deleteCompletion(auth: $auth, completionId: $completionId) {
       goals {
         id
-        latestCompletion {
+        completions {
           id
         }
       }
@@ -43,7 +43,7 @@ const DELETE_COMPLETION_MUTATION = gql`
 `;
 
 class Completion extends Component {
-  checked = () => !!this.props.goal.latestCompletion
+  checked = () => !!this.props.goal.completions.length > 0
 
   toggle = () => {
     if (!this.checked()) {
@@ -59,7 +59,7 @@ class Completion extends Component {
     this.props.deleteCompletion({
       variables: {
         auth: this.props.auth,
-        completionId: this.props.goal.latestCompletion.id
+        completionId: this.props.goal.completions[0].id
       }
     });
   }
@@ -76,7 +76,7 @@ class Completion extends Component {
             <input
               name="completed"
               type="checkbox"
-              checked={!!this.props.goal.latestCompletion}
+              checked={this.checked()}
               onChange={this.toggle}
             />
           </label>

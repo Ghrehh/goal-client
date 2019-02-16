@@ -16,7 +16,7 @@ export const GOALS_QUERY = gql`
       id
       name
       dueDate
-      latestCompletion {
+      completions {
         id
         completedAt
       }
