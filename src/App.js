@@ -4,15 +4,35 @@ import LogIn from 'components/LogIn';
 import Goals from 'components/Goals';
 import CreateGoal from 'components/CreateGoal';
 import AuthContext from 'components/context/Auth';
+import SelectedDateContext from 'components/context/SelectedDate';
+
+const defaultDate = () => {
+  const today = new Date()
+  let month = today.getMonth() + 1
+  month = month < 10 ? "0" + String(month) : String(month)
+
+  let date = today.getDate()
+  date = date < 10 ? "0" + String(date) : String(date)
+
+  return `${today.getFullYear()}-${month}-${date}`;
+}
+
 
 class App extends Component {
-  state = {}
+  state = {
+    selectedDate: defaultDate()
+  }
 
   componentDidMount() {
     const rememberToken = LocalStorage.getItem('rememberToken')
     const userId = LocalStorage.getItem('userId')
 
     if (rememberToken && userId) this.setState({ rememberToken, userId })
+  }
+
+  handleDateChange = event => {
+    event.preventDefault();
+    this.setState({ selectedDate: event.target.value })
   }
 
   setAuth = ({ rememberToken, userId }) => {
@@ -31,8 +51,15 @@ class App extends Component {
     if (this.state.rememberToken && this.state.userId) {
       return (
         <AuthContext.Provider value={this.auth()}>
-          <Goals />
-          <CreateGoal />
+          <SelectedDateContext.Provider value={this.state.selectedDate}>
+            <input
+              type="date"
+              value={this.state.selectedDate}
+              onChange={this.handleDateChange}
+            />
+            <Goals />
+            <CreateGoal />
+          </SelectedDateContext.Provider>
         </AuthContext.Provider>
       )
     }
