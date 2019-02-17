@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LocalStorage from 'util/LocalStorage';
 import LogIn from 'components/LogIn';
+import Header from 'components/Header';
 import Goals from 'components/Goals';
 import CreateGoal from 'components/CreateGoal';
 import AuthContext from 'components/context/Auth';
@@ -59,12 +60,11 @@ class App extends Component {
       return (
         <AuthContext.Provider value={this.auth()}>
           <SelectedDateContext.Provider value={this.state.selectedDate}>
-            <input
-              type="date"
-              value={this.state.selectedDate}
-              onChange={this.handleDateChange}
+            <Header
+              logOut={this.logOut}
+              selectedDate={this.state.selectedDate}
+              handleDateChange={this.handleDateChange}
             />
-            <button onClick={this.logOut}>Log Out</button>
             <Goals />
             <CreateGoal />
           </SelectedDateContext.Provider>

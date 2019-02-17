@@ -1,0 +1,36 @@
+.header {
+  padding: 10px;
+  background-color: var(--charcoal);
+  position: sticky;
+  top: 0;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.selectedDateLabel {
+  color: var(--light-grey);
+  margin-right: 10px;
+}
+
+.button {
+  margin-left: auto;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--red);
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  color: var(--light-grey);
+  border: none;
+  padding: 10px 12px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.5s, filter 0.5s;
+  display: inline-block;
+}
+
+.button:hover {
+  /*transform: translate(0, -3px);*/
+  filter: brightness(1.3);
+}
