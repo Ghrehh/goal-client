@@ -1,0 +1,19 @@
+language: node_js
+node_js: "7"
+install: yarn
+script: 
+ - yarn run test
+ - yarn run lint
+ - yarn run build
+
+notifications:
+  email: false
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  target_branch: master
+  repo: 'goalie-app/goalie-app.github.io'
+  local_dir: build
+  on:
+    branch: master
