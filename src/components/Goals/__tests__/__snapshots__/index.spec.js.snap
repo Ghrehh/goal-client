@@ -16,6 +16,9 @@ exports[`Goals snapshot renders the component correctly 1`] = `
         }
       }
     />
+    <DeleteWrapped
+      goalId={1}
+    />
     <br />
   </div>
 </LoadingAndErrorHandler>

@@ -9,6 +9,7 @@ import GoalsModel from 'models/Goals';
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import Completion from './Completion';
+import Delete from './Delete';
 
 export const GOALS_QUERY = gql`
   query Goals($auth: AuthInput!){
@@ -30,6 +31,7 @@ class Goals extends Component {
       <div key={goal.id}>
         <p>{goal.name}</p>
         <Completion goal={goal} />
+        <Delete goalId={goal.id} />
         <br />
       </div>
     )

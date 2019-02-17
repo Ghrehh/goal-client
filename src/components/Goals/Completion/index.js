@@ -10,7 +10,6 @@ import SelectedDateContext from 'components/context/SelectedDate';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import AuthModel from 'models/Auth';
 import GoalModel, { goalCompletionForDate } from 'models/Goal';
-import { GOALS_QUERY } from 'components/Goals';
 
 const CREATE_COMPLETION_MUTATION = gql`
   mutation CreateCompletion(
