@@ -9,6 +9,7 @@ import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import Completion from './Completion';
 import Delete from './Delete';
+import styles from './styles.module.css';
 
 export const GOALS_QUERY = gql`
   query Goals($auth: AuthInput!){
@@ -27,8 +28,8 @@ export const GOALS_QUERY = gql`
 class Goals extends Component {
   renderGoal(goal) {
     return (
-      <div key={goal.id}>
-        <p>{goal.name}</p>
+      <div key={goal.id} className={styles.goal}>
+        <h3 className={styles.goalName}>{goal.name}</h3>
         <Completion goal={goal} />
         <Delete goalId={goal.id} />
         <br />

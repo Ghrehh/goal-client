@@ -1,0 +1,10 @@
+.goal {
+  background-color: var(--light-grey);
+  border-radius: 3px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.goalName {
+  font-size: 18px;
+}
