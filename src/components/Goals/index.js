@@ -4,7 +4,6 @@ import { ApolloProvider } from "react-apollo";
 import client from 'client';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import LocalStorage from 'util/LocalStorage'
 import GoalsModel from 'models/Goals';
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
@@ -71,7 +70,7 @@ class GoalsWrapped extends Component {
                 return (<Goals
                   loading={loading}
                   error={error}
-                  goals={data && data.goals || []}
+                  goals={(data && data.goals) || []}
                 />)
               }}
             </Query>

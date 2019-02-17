@@ -5,9 +5,7 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import client from 'client';
 import { GOALS_QUERY } from 'components/Goals';
-import LocalStorage from 'util/LocalStorage'
 import AuthContext from 'components/context/Auth';
-import SelectedDateContext from 'components/context/SelectedDate';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import AuthModel from 'models/Auth';
 
@@ -62,11 +60,6 @@ class DeleteWrapped extends Component {
             <Mutation
               mutation={DELETE_GOAL_MUTATION}
               update={(cache, { data }) => {
-                const { goals } = cache.readQuery({
-                  query: GOALS_QUERY,
-                  variables: { auth }
-                });
-
                 cache.writeQuery({
                   query: GOALS_QUERY,
                   variables: { auth },

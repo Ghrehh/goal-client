@@ -4,7 +4,6 @@ import { ApolloProvider } from "react-apollo";
 import client from 'client';
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
-import LocalStorage from 'util/LocalStorage'
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 
 const CREATE_SESSION_MUTATION = gql`

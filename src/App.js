@@ -42,6 +42,13 @@ class App extends Component {
     LocalStorage.setItem('userId', userId)
   }
 
+  logOut = () => {
+    this.setState({ rememberToken: undefined, userId: undefined })
+
+    LocalStorage.setItem('rememberToken', undefined)
+    LocalStorage.setItem('userId', undefined)
+  }
+
   auth = () => ({
     rememberToken: this.state.rememberToken,
     userId: parseInt(this.state.userId, 10)
@@ -57,6 +64,7 @@ class App extends Component {
               value={this.state.selectedDate}
               onChange={this.handleDateChange}
             />
+            <button onClick={this.logOut}>Log Out</button>
             <Goals />
             <CreateGoal />
           </SelectedDateContext.Provider>

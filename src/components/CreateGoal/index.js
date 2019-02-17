@@ -4,7 +4,6 @@ import { ApolloProvider } from "react-apollo";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import client from 'client';
-import LocalStorage from 'util/LocalStorage'
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import AuthModel from 'models/Auth';
