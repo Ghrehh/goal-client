@@ -3,9 +3,11 @@ import LocalStorage from 'util/LocalStorage';
 import LogIn from 'components/LogIn';
 import Header from 'components/Header';
 import Goals from 'components/Goals';
+import Goal from 'components/Goal';
 import CreateGoal from 'components/CreateGoal';
 import AuthContext from 'components/context/Auth';
 import SelectedDateContext from 'components/context/SelectedDate';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 const defaultDate = () => {
   const today = new Date()
@@ -55,6 +57,15 @@ class App extends Component {
     userId: parseInt(this.state.userId, 10)
   })
 
+  renderGoalsPage() {
+    return (
+      <React.Fragment>
+        <Goals />
+        <CreateGoal />
+      </React.Fragment>
+    )
+  }
+
   render() {
     if (this.state.rememberToken && this.state.userId) {
       return (
@@ -65,8 +76,12 @@ class App extends Component {
               selectedDate={this.state.selectedDate}
               handleDateChange={this.handleDateChange}
             />
-            <Goals />
-            <CreateGoal />
+            <Router>
+              <React.Fragment>
+                <Route exact path="/" render={this.renderGoalsPage} />
+                <Route exact path="/goal/:goalId" component={Goal} />
+              </React.Fragment>
+            </Router>
           </SelectedDateContext.Provider>
         </AuthContext.Provider>
       )

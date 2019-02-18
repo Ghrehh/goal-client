@@ -7,7 +7,7 @@ class Header extends Component {
     return (
       <header className={styles.header}>
         <label
-          for="selected-date"
+          htmlFor="selected-date"
           className={styles.selectedDateLabel}
         >
           Selected Date
