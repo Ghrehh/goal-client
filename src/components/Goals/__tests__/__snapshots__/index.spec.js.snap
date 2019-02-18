@@ -4,10 +4,14 @@ exports[`Goals snapshot renders the component correctly 1`] = `
 <LoadingAndErrorHandler
   loading={false}
 >
-  <div>
-    <p>
+  <div
+    className="goal"
+  >
+    <h3
+      className="goalName"
+    >
       Goal
-    </p>
+    </h3>
     <CompletionWrapped
       goal={
         Object {
