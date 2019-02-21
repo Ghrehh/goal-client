@@ -74,17 +74,12 @@ class Completion extends Component {
         loading={this.props.loading}
         error={this.props.error}
       >
-        <form>
-          <label>
-            Completed:
-            <input
-              name="completed"
-              type="checkbox"
-              checked={this.checked()}
-              onChange={this.toggle}
-            />
-          </label>
-        </form>
+        <input
+          name="completed"
+          type="checkbox"
+          checked={this.checked()}
+          onChange={this.toggle}
+        />
       </LoadingAndErrorHandler>
     );
   }

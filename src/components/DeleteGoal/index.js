@@ -8,6 +8,7 @@ import { GOALS_QUERY } from 'components/Goals';
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import AuthModel from 'models/Auth';
+import { Redirect } from 'react-router';
 
 const DELETE_GOAL_MUTATION = gql`
   mutation DeleteGoal($auth: AuthInput!, $goalId: Int!){
@@ -30,6 +31,10 @@ class Delete extends Component {
   }
 
   render() {
+    if (this.props.called && !this.props.loading) {
+      return <Redirect push to="/" />
+    }
+
     return (
       <LoadingAndErrorHandler
         loading={this.props.loading}
@@ -42,6 +47,7 @@ class Delete extends Component {
 }
 
 Delete.propTypes = {
+  called: PropTypes.bool.isRequired,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.object,
   goalId: PropTypes.number.isRequired,
@@ -67,8 +73,9 @@ class DeleteWrapped extends Component {
                 });
               }}
             >
-              {(deleteGoal, { loading, error }) => (
+              {(deleteGoal, { loading, error, called }) => (
                 <Delete
+                  called={called}
                   loading={loading}
                   error={error}
                   auth={auth}

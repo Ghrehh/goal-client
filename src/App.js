@@ -71,13 +71,13 @@ class App extends Component {
       return (
         <AuthContext.Provider value={this.auth()}>
           <SelectedDateContext.Provider value={this.state.selectedDate}>
-            <Header
-              logOut={this.logOut}
-              selectedDate={this.state.selectedDate}
-              handleDateChange={this.handleDateChange}
-            />
             <Router>
               <React.Fragment>
+                <Header
+                  logOut={this.logOut}
+                  selectedDate={this.state.selectedDate}
+                  handleDateChange={this.handleDateChange}
+                />
                 <Route exact path="/" render={this.renderGoalsPage} />
                 <Route exact path="/goal/:goalId" component={Goal} />
               </React.Fragment>

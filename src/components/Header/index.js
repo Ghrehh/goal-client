@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 import styles from './styles.module.css';
 
 class Header extends Component {
@@ -19,6 +20,8 @@ class Header extends Component {
           value={this.props.selectedDate}
           onChange={this.props.handleDateChange}
         />
+
+        <Link className={styles.goalsLink} to={'/'}>View Goals</Link>
 
         <button
           onClick={this.props.logOut}

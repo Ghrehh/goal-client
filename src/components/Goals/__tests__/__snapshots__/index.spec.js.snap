@@ -4,8 +4,10 @@ exports[`Goals snapshot renders the component correctly 1`] = `
 <LoadingAndErrorHandler
   loading={false}
 >
-  <div
+  <Link
     className="goal"
+    replace={false}
+    to="goal/1"
   >
     <h3
       className="goalName"
@@ -20,10 +22,6 @@ exports[`Goals snapshot renders the component correctly 1`] = `
         }
       }
     />
-    <DeleteWrapped
-      goalId={1}
-    />
-    <br />
-  </div>
+  </Link>
 </LoadingAndErrorHandler>
 `;

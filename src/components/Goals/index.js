@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ApolloProvider } from "react-apollo";
+import { Link } from 'react-router-dom'
 import client from 'client';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import GoalsModel from 'models/Goals';
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
-import Completion from './Completion';
-import Delete from './Delete';
+import Completion from 'components/Completion';
+import Delete from 'components/DeleteGoal';
 import styles from './styles.module.css';
 
 export const GOALS_QUERY = gql`
@@ -28,12 +29,10 @@ export const GOALS_QUERY = gql`
 class Goals extends Component {
   renderGoal(goal) {
     return (
-      <div key={goal.id} className={styles.goal}>
+      <Link to={`goal/${goal.id}`} key={goal.id} className={styles.goal}>
         <h3 className={styles.goalName}>{goal.name}</h3>
         <Completion goal={goal} />
-        <Delete goalId={goal.id} />
-        <br />
-      </div>
+      </Link>
     )
   }
 

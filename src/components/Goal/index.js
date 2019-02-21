@@ -7,6 +7,10 @@ import gql from "graphql-tag";
 import GoalModel from 'models/Goal';
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
+import Completion from 'components/Completion';
+import Delete from 'components/DeleteGoal';
+import HeatMap from './HeatMap';
+import styles from './styles.module.css';
 
 export const GOAL_QUERY = gql`
   query Goal($auth: AuthInput!, $goalId: Int!){
@@ -29,9 +33,11 @@ class Goal extends Component {
     if (!goal) return null;
 
     return (
-      <div key={goal.id}>
-        <h3>{goal.name}</h3>
-        <br />
+      <div className={styles.goal} key={goal.id}>
+        <h1 className={styles.title}>{goal.name}</h1>
+        <Completion goal={goal} />
+        <Delete goalId={goal.id} />
+        <HeatMap completions={goal.completions} />
       </div>
     )
   }
