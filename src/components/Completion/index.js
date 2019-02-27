@@ -85,7 +85,12 @@ class Completion extends Component {
         error={this.props.error}
       >
         <div className={styles.tickBox} onClick={this.toggle}>
-          <input name="completed" type="checkbox" onChange={this.toggle} />
+          <input
+            name="completed"
+            type="checkbox"
+            onChange={this.toggle}
+            checked={this.checked()}
+          />
 
           <svg
             width="630px"

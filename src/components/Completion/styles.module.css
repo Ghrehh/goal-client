@@ -1,11 +1,17 @@
+.tickBox {
+  transition: filter 0.5s;
+  cursor: pointer;
+}
+
 .tickBox input {
   position: absolute;
   opacity: 0;
+  pointer-events: none;
 }
 
 .tickBox svg {
-  width: 23px;
-  height: 23px;
+  width: 35px;
+  height: 35px;
 }
 
 .tick {
@@ -14,6 +20,10 @@
 
 .box {
   fill: var(--charcoal);
+}
+
+.tickBox:hover {
+  filter: brightness(1.5);
 }
 
 .tickCover {

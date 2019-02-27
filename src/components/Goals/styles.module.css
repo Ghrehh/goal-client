@@ -7,10 +7,14 @@
   text-decoration: none;
   color: var(--charcoal);
   display: flex;
+  align-items: center;
 }
 
 .goalName {
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 800;
-  margin-bottom: 10px;
+}
+
+.completionContainer {
+  margin-left: auto;
 }

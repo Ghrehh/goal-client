@@ -31,7 +31,9 @@ class Goals extends Component {
     return (
       <Link to={`goal/${goal.id}`} key={goal.id} className={styles.goal}>
         <h3 className={styles.goalName}>{goal.name}</h3>
-        <Completion goal={goal} />
+        <div className={styles.completionContainer}>
+          <Completion goal={goal} />
+        </div>
       </Link>
     )
   }

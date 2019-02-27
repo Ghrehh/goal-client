@@ -14,14 +14,18 @@ exports[`Goals snapshot renders the component correctly 1`] = `
     >
       Goal
     </h3>
-    <CompletionWrapped
-      goal={
-        Object {
-          "id": 1,
-          "name": "Goal",
+    <div
+      className="completionContainer"
+    >
+      <CompletionWrapped
+        goal={
+          Object {
+            "id": 1,
+            "name": "Goal",
+          }
         }
-      }
-    />
+      />
+    </div>
   </Link>
 </LoadingAndErrorHandler>
 `;
