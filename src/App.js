@@ -4,10 +4,9 @@ import LogIn from 'components/LogIn';
 import Header from 'components/Header';
 import Goals from 'components/Goals';
 import Goal from 'components/Goal';
-import CreateGoal from 'components/CreateGoal';
+import NewGoal from 'components/NewGoal';
 import AuthContext from 'components/context/Auth';
-import SelectedDateContext from 'components/context/SelectedDate';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import SelectedDateContext from 'components/context/SelectedDate'; import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 const defaultDate = () => {
   const today = new Date()
@@ -57,15 +56,6 @@ class App extends Component {
     userId: parseInt(this.state.userId, 10)
   })
 
-  renderGoalsPage() {
-    return (
-      <React.Fragment>
-        <Goals />
-        <CreateGoal />
-      </React.Fragment>
-    )
-  }
-
   render() {
     if (this.state.rememberToken && this.state.userId) {
       return (
@@ -78,8 +68,9 @@ class App extends Component {
                   selectedDate={this.state.selectedDate}
                   handleDateChange={this.handleDateChange}
                 />
-                <Route exact path="/" render={this.renderGoalsPage} />
-                <Route exact path="/goal/:goalId" component={Goal} />
+                <Route exact path="/" component={Goals} />
+                <Route exact path="/new-goal" component={NewGoal} />
+                <Route exact path="/goals/:goalId" component={Goal} />
               </React.Fragment>
             </Router>
           </SelectedDateContext.Provider>

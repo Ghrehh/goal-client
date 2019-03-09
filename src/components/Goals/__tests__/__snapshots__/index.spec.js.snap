@@ -7,7 +7,7 @@ exports[`Goals snapshot renders the component correctly 1`] = `
   <Link
     className="goal"
     replace={false}
-    to="goal/1"
+    to="goals/1"
   >
     <h3
       className="goalName"

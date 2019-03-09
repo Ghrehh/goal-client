@@ -1,9 +1,9 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow'
 import { mount } from 'enzyme';
-import { CreateGoal } from '../';
+import { NewGoal } from '../';
 
-describe('CreateGoal', () => {
+describe('NewGoal', () => {
   let testContext = {};
 
   beforeEach(() => {
@@ -12,7 +12,7 @@ describe('CreateGoal', () => {
     testContext.createGoalMock = jest.fn();
 
     testContext.component = (
-      <CreateGoal
+      <NewGoal
         createGoal={testContext.createGoalMock}
         auth={testContext.auth}
         loading={false}

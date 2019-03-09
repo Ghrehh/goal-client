@@ -1,0 +1,12 @@
+.newGoal {
+  padding: 20px;
+}
+
+.title {
+  font-size: 22px;
+  text-align: center;
+}
+
+.button {
+  background-color: var(--green);
+}

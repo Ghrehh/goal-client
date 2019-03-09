@@ -28,7 +28,7 @@ export const GOALS_QUERY = gql`
 class Goals extends Component {
   renderGoal(goal) {
     return (
-      <Link to={`goal/${goal.id}`} key={goal.id} className={styles.goal}>
+      <Link to={`goals/${goal.id}`} key={goal.id} className={styles.goal}>
         <h3 className={styles.goalName}>{goal.name}</h3>
         <div className={styles.completionContainer}>
           <Completion goal={goal} />

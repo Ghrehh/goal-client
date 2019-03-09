@@ -1,24 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CreateGoal snapshot renders the component correctly 1`] = `
+exports[`NewGoal snapshot renders the component correctly 1`] = `
 <LoadingAndErrorHandler
   loading={false}
 >
-  <form>
-    <h3>
+  <form
+    className="newGoal"
+  >
+    <h1
+      className="title"
+    >
       Create Goal
-    </h3>
+    </h1>
     <label>
       Name
       <input
         className="name"
       />
     </label>
-    <button
+    <Button
+      className="button"
       onClick={[Function]}
     >
       Create Goal
-    </button>
+    </Button>
   </form>
 </LoadingAndErrorHandler>
 `;

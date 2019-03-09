@@ -101,9 +101,9 @@ class Completion extends Component {
           >
             <g
               stroke="none"
-              stroke-width="1"
+              strokeWidth="1"
               fill="none"
-              fill-rule="evenodd"
+              fillRule="evenodd"
             >
               <rect
                 className={styles.box}
@@ -117,7 +117,7 @@ class Completion extends Component {
               <polyline
                 className={styles.tick}
                 stroke="none"
-                stroke-width="100"
+                strokeWidth="100"
                 points="109 293.646424 229.186565 440 529 152"
               />
               <rect

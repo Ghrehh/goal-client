@@ -20,22 +20,6 @@
 }
 
 .button {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
   background-color: var(--red);
-  box-shadow: var(--box-shadow);
-  cursor: pointer;
   color: var(--light-grey);
-  border: none;
-  padding: 10px 12px;
-  border-radius: 3px;
-  font-size: 14px;
-  font-weight: 600;
-  transition: transform 0.5s, filter 0.5s;
-  display: inline-block;
-}
-
-.button:hover {
-  /*transform: translate(0, -3px);*/
-  filter: brightness(1.3);
 }

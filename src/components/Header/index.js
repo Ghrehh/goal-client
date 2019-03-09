@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Button from 'components/Button';
 import styles from './styles.module.css';
 
 class Header extends Component {
@@ -23,12 +24,12 @@ class Header extends Component {
 
         <Link className={styles.goalsLink} to={'/'}>View Goals</Link>
 
-        <button
+        <Button
           onClick={this.props.logOut}
           className={styles.button}
         >
           Log Out
-        </button>
+        </Button>
       </header>
     );
   }

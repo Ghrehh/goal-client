@@ -4,10 +4,12 @@ import { ApolloProvider } from "react-apollo";
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import client from 'client';
-import AuthContext from 'components/context/Auth';
-import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import AuthModel from 'models/Auth';
 import { GOALS_QUERY } from 'components/Goals';
+import AuthContext from 'components/context/Auth';
+import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
+import Button from 'components/Button';
+import styles from './styles.module.css';
 
 const CREATE_GOAL_MUTATION = gql`
   mutation CreateGoal($auth: AuthInput!, $goalName: String!){
@@ -25,7 +27,7 @@ const CREATE_GOAL_MUTATION = gql`
   }
 `;
 
-class CreateGoal extends Component {
+class NewGoal extends Component {
   nameInput = React.createRef();
 
   handleGoalCreation = event => {
@@ -45,29 +47,34 @@ class CreateGoal extends Component {
         loading={this.props.loading}
         error={this.props.error}
       >
-        <form>
-          <h3>Create Goal</h3>
+        <form className={styles.newGoal}>
+          <h1 className={styles.title}>Create Goal</h1>
           <label>
             Name
             <input className='name' ref={this.nameInput}/>
           </label>
-          <button onClick={this.handleGoalCreation}>Create Goal</button>
+          <Button
+            onClick={this.handleGoalCreation}
+            className={styles.button}
+          >
+            Create Goal
+          </Button>
         </form>
       </LoadingAndErrorHandler>
     );
   }
 }
 
-CreateGoal.propTypes = {
+NewGoal.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.object,
   auth: AuthModel.isRequired,
   createGoal: PropTypes.func.isRequired,
 }
 
-export { CreateGoal };
+export { NewGoal };
 
-class CreateGoalWrapped extends Component {
+class NewGoalWrapped extends Component {
   render() {
     return (
       <AuthContext.Consumer>
@@ -91,7 +98,7 @@ class CreateGoalWrapped extends Component {
               {
                 (createGoal, {loading, error }) => {
                   return (
-                    <CreateGoal
+                    <NewGoal
                       loading={loading}
                       error={error}
                       createGoal={createGoal}
@@ -108,4 +115,4 @@ class CreateGoalWrapped extends Component {
   }
 }
 
-export default CreateGoalWrapped;
+export default NewGoalWrapped;
