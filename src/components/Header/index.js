@@ -22,6 +22,7 @@ class Header extends Component {
           onChange={this.props.handleDateChange}
         />
 
+        <Link className={styles.newGoalLink} to={'/new-goal'}>New Goals</Link>
         <Link className={styles.goalsLink} to={'/'}>View Goals</Link>
 
         <Button

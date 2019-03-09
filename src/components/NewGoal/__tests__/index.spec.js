@@ -16,6 +16,7 @@ describe('NewGoal', () => {
         createGoal={testContext.createGoalMock}
         auth={testContext.auth}
         loading={false}
+        called={false}
         error={undefined}
       />
     );

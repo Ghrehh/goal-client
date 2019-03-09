@@ -1,12 +1,28 @@
 .newGoal {
   padding: 20px;
+  text-align: center;
 }
 
 .title {
-  font-size: 22px;
+  font-size: 25px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .button {
   background-color: var(--green);
+}
+
+.inputContainer {
+  margin-bottom: 20px;
+}
+
+.inputContainer > label {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.inputContainer > input {
+  font-size: 20px;
 }

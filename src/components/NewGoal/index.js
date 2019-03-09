@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ApolloProvider } from "react-apollo";
 import { Mutation } from "react-apollo";
+import { Redirect } from 'react-router';
 import gql from "graphql-tag";
 import client from 'client';
 import AuthModel from 'models/Auth';
@@ -42,6 +43,10 @@ class NewGoal extends Component {
   }
 
   render() {
+    if (this.props.called && !this.props.loading) {
+      return <Redirect push to="/" />
+    }
+
     return (
       <LoadingAndErrorHandler
         loading={this.props.loading}
@@ -49,10 +54,18 @@ class NewGoal extends Component {
       >
         <form className={styles.newGoal}>
           <h1 className={styles.title}>Create Goal</h1>
-          <label>
-            Name
-            <input className='name' ref={this.nameInput}/>
-          </label>
+          <div className={styles.inputContainer}>
+            <label htmlFor='name-input'>
+              Name
+            </label>
+
+            <input
+              className='name'
+              ref={this.nameInput}
+              name='name-input'
+            />
+          </div>
+
           <Button
             onClick={this.handleGoalCreation}
             className={styles.button}
@@ -67,6 +80,7 @@ class NewGoal extends Component {
 
 NewGoal.propTypes = {
   loading: PropTypes.bool.isRequired,
+  called: PropTypes.bool.isRequired,
   error: PropTypes.object,
   auth: AuthModel.isRequired,
   createGoal: PropTypes.func.isRequired,
@@ -96,13 +110,14 @@ class NewGoalWrapped extends Component {
               }}
             >
               {
-                (createGoal, {loading, error }) => {
+                (createGoal, {loading, error, called }) => {
                   return (
                     <NewGoal
                       loading={loading}
                       error={error}
                       createGoal={createGoal}
                       auth={auth}
+                      called={called}
                     />
                   )
                 }

@@ -12,12 +12,19 @@ exports[`NewGoal snapshot renders the component correctly 1`] = `
     >
       Create Goal
     </h1>
-    <label>
-      Name
+    <div
+      className="inputContainer"
+    >
+      <label
+        htmlFor="name-input"
+      >
+        Name
+      </label>
       <input
         className="name"
+        name="name-input"
       />
-    </label>
+    </div>
     <Button
       className="button"
       onClick={[Function]}
