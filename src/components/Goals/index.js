@@ -9,7 +9,6 @@ import GoalsModel from 'models/Goals';
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import Completion from 'components/Completion';
-import Delete from 'components/DeleteGoal';
 import styles from './styles.module.css';
 
 export const GOALS_QUERY = gql`

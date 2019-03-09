@@ -18,6 +18,7 @@ describe('Delete', () => {
         goalId={1}
         loading={false}
         error={undefined}
+        called={false}
       />
     );
   });
