@@ -4,14 +4,14 @@
   position: sticky;
   top: 0;
   margin-bottom: 10px;
-  align-items: center;
-  display: flex;
   width: 100%;
   box-sizing: border-box;
 }
 
 .headerContents {
   margin-left: auto;
+  align-items: center;
+  display: flex;
 }
 
 .hamburger {
@@ -22,6 +22,10 @@
 .selectedDateLabel {
   color: var(--light-grey);
   margin-right: 10px;
+}
+
+.selectedDate {
+  margin-right: auto;
 }
 
 .link {
@@ -50,10 +54,12 @@
   }
 
   .selectedDateLabel {
+    margin: 0;
     margin-bottom: 5px;
   }
 
   .link, .selectedDate {
+    margin: 0;
     margin-bottom: 20px;
   }
 }
@@ -61,4 +67,5 @@
 .headerContentsMobile {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }

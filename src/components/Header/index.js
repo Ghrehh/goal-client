@@ -12,6 +12,10 @@ class Header extends Component {
     this.setState({ open: !this.state.open });
   }
 
+  closeMenu = () => {
+    this.setState({ open: false });
+  }
+
   render() {
     const headerContentsClass = `
       ${styles.headerContents}
@@ -39,7 +43,7 @@ class Header extends Component {
           />
 
           <Link
-            onClick={this.handleHamburgerClick}
+            onClick={this.closeMenu}
             className={styles.link}
             to={"/new-goal"}
           >
@@ -47,7 +51,7 @@ class Header extends Component {
           </Link>
 
           <Link
-            onClick={this.handleHamburgerClick}
+            onClick={this.closeMenu}
             className={styles.link}
             to={"/"}
           >
