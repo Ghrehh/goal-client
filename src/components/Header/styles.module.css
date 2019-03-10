@@ -58,8 +58,7 @@
   }
 }
 
-  .headerContentsMobile {
-    display: flex;
-    flex-direction: column;
-  }
-
+.headerContentsMobile {
+  display: flex;
+  flex-direction: column;
+}
