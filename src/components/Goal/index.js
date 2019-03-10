@@ -10,6 +10,7 @@ import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import Completion from 'components/Completion';
 import DeleteGoal from 'components/DeleteGoal';
 import HeatMap from './HeatMap';
+import Notes from './Notes';
 import styles from './styles.module.css';
 
 export const GOAL_QUERY = gql`
@@ -44,6 +45,7 @@ class Goal extends Component {
           <DeleteGoal goalId={goal.id} />
         </div>
 
+        <Notes goalId={goal.id} />
         <HeatMap completions={goal.completions} />
       </div>
     )
