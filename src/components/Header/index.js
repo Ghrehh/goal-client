@@ -16,7 +16,8 @@ class Header extends Component {
     const headerContentsClass = `
       ${styles.headerContents}
       ${this.state.open && styles.headerContentsMobile}
-    `
+    `;
+
     return (
       <header className={styles.header}>
         <Hamburger

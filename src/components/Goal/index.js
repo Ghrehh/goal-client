@@ -8,7 +8,7 @@ import GoalModel from 'models/Goal';
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import Completion from 'components/Completion';
-import Delete from 'components/DeleteGoal';
+import DeleteGoal from 'components/DeleteGoal';
 import HeatMap from './HeatMap';
 import styles from './styles.module.css';
 
@@ -35,8 +35,15 @@ class Goal extends Component {
     return (
       <div className={styles.goal} key={goal.id}>
         <h1 className={styles.title}>{goal.name}</h1>
-        <Completion goal={goal} />
-        <Delete goalId={goal.id} />
+        <div className={styles.completionContainer}>
+          <label htmlFor='completed'>Goal Completed</label>
+          <Completion goal={goal} />
+        </div>
+
+        <div className={styles.deleteGoalContainer}>
+          <DeleteGoal goalId={goal.id} />
+        </div>
+
         <HeatMap completions={goal.completions} />
       </div>
     )

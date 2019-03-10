@@ -9,6 +9,8 @@ import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import AuthModel from 'models/Auth';
 import { Redirect } from 'react-router';
+import Button from 'components/Button';
+import styles from './styles.module.css';
 
 const DELETE_GOAL_MUTATION = gql`
   mutation DeleteGoal($auth: AuthInput!, $goalId: Int!){
@@ -40,7 +42,12 @@ class Delete extends Component {
         loading={this.props.loading}
         error={this.props.error}
       >
-        <button onClick={this.handleDelete}>Delete</button>
+        <Button
+          onClick={this.handleDelete}
+          className={styles.button}
+        >
+          Delete Goal
+        </Button>
       </LoadingAndErrorHandler>
     );
   }

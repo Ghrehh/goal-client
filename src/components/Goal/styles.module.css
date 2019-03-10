@@ -5,7 +5,22 @@
 .title {
   font-size: 25px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
-.calendarContainer {
+.completionContainer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.completionContainer > label {
+  margin-right: 10px;
+}
+
+.deleteGoalContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
 }

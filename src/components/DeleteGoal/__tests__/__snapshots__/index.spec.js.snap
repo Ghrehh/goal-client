@@ -4,10 +4,11 @@ exports[`Delete snapshot renders the component correctly 1`] = `
 <LoadingAndErrorHandler
   loading={false}
 >
-  <button
+  <Button
+    className="button"
     onClick={[Function]}
   >
-    Delete
-  </button>
+    Delete Goal
+  </Button>
 </LoadingAndErrorHandler>
 `;
