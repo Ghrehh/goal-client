@@ -64,7 +64,6 @@ export { Goal };
 
 class GoalWrapped extends Component {
   render() {
-    console.log(this.props)
     return (
       <AuthContext.Consumer>
         {auth => (

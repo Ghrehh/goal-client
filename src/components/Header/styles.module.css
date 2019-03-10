@@ -4,8 +4,19 @@
   position: sticky;
   top: 0;
   margin-bottom: 10px;
-  display: flex;
   align-items: center;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.headerContents {
+  margin-left: auto;
+}
+
+.hamburger {
+  display: none;
+  margin-left: auto;
 }
 
 .selectedDateLabel {
@@ -13,13 +24,7 @@
   margin-right: 10px;
 }
 
-.newGoalLink {
-  margin-left: auto;
-  margin-right: 10px;
-  color: white;
-}
-
-.goalsLink {
+.link {
   margin-right: 10px;
   color: white;
 }
@@ -28,3 +33,33 @@
   background-color: var(--red);
   color: var(--light-grey);
 }
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .headerContents {
+    display: none;
+    margin-left: initial;
+    width: 100%;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .selectedDateLabel {
+    margin-bottom: 5px;
+  }
+
+  .link, .selectedDate {
+    margin-bottom: 20px;
+  }
+}
+
+  .headerContentsMobile {
+    display: flex;
+    flex-direction: column;
+  }
+

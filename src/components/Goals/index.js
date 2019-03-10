@@ -64,16 +64,13 @@ class GoalsWrapped extends Component {
         {auth => (
           <ApolloProvider client={client}>
             <Query query={GOALS_QUERY} variables={{ auth }}>
-              {({ data, loading, error }) => {
-                if (error) {
-                  console.log(error.message)
-                }
-                return (<Goals
+              {({ data, loading, error }) => (
+                <Goals
                   loading={loading}
                   error={error}
                   goals={(data && data.goals) || []}
-                />)
-              }}
+                />
+              )}
             </Query>
           </ApolloProvider>
         )}

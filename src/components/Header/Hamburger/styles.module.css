@@ -1,0 +1,9 @@
+.hamburger {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.hamburger rect {
+  fill: var(--light-grey);
+}
