@@ -24,3 +24,11 @@
   justify-content: center;
   margin-bottom: 60px;
 }
+
+.newGoalButtonContainer {
+  margin-left: 10px;
+}
+
+.newGoalButton {
+  background-color: var(--green);
+}

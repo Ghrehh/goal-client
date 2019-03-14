@@ -10,6 +10,7 @@ import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import Completion from 'components/Completion';
 import DeleteGoal from 'components/DeleteGoal';
+import Button from 'components/Button';
 import HeatMap from './HeatMap';
 import Notes from './Notes';
 import styles from './styles.module.css';
@@ -44,7 +45,15 @@ class Goal extends Component {
 
         <div className={styles.deleteGoalContainer}>
           <DeleteGoal goalId={goal.id} />
-          <Link to={`/goals/${goal.id}/new-note`}>New Goal</Link>
+
+          <Link
+            className={styles.newGoalButtonContainer}
+            to={`/goals/${goal.id}/new-note`}
+          >
+            <Button className={styles.newGoalButton}>
+              New Goal
+            </Button>
+          </Link>
         </div>
 
         <Notes goalId={goal.id} />
