@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ApolloProvider } from "react-apollo";
+import { Link } from "react-router-dom";
 import client from 'client';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
@@ -43,6 +44,7 @@ class Goal extends Component {
 
         <div className={styles.deleteGoalContainer}>
           <DeleteGoal goalId={goal.id} />
+          <Link to={`/goals/${goal.id}/new-note`}>New Goal</Link>
         </div>
 
         <Notes goalId={goal.id} />
@@ -98,6 +100,5 @@ class GoalWrapped extends Component {
     );
   }
 }
-
 
 export default GoalWrapped;

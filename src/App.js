@@ -5,6 +5,7 @@ import Header from 'components/Header';
 import Goals from 'components/Goals';
 import Goal from 'components/Goal';
 import NewGoal from 'components/NewGoal';
+import NewNote from 'components/NewNote';
 import AuthContext from 'components/context/Auth';
 import SelectedDateContext from 'components/context/SelectedDate'; import { Route, BrowserRouter as Router } from 'react-router-dom';
 
@@ -71,6 +72,7 @@ class App extends Component {
                 <Route exact path="/" component={Goals} />
                 <Route exact path="/new-goal" component={NewGoal} />
                 <Route exact path="/goals/:goalId" component={Goal} />
+                <Route exact path="/goals/:goalId/new-note" component={NewNote} />
               </React.Fragment>
             </Router>
           </SelectedDateContext.Provider>
