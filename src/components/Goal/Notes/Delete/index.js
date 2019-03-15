@@ -8,7 +8,6 @@ import { NOTES_QUERY } from 'components/Goal/Notes';
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import AuthModel from 'models/Auth';
-import { Redirect } from 'react-router';
 import Button from 'components/Button';
 import styles from './styles.module.css';
 
