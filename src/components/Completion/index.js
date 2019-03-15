@@ -6,6 +6,7 @@ import gql from "graphql-tag";
 import client from "client";
 import AuthContext from "components/context/Auth";
 import SelectedDateContext from "components/context/SelectedDate";
+import Button from "components/Button";
 import LoadingAndErrorHandler from "components/LoadingAndErrorHandler";
 import AuthModel from "models/Auth";
 import GoalModel, { goalCompletionForDate } from "models/Goal";
@@ -72,65 +73,98 @@ class Completion extends Component {
     });
   };
 
-  render() {
-    const tickCoverClass = `
-      ${styles.box}
-      ${styles.tickCover}
-      ${this.checked() && styles.tickCoverChecked}
-    `;
+  get tickCoverClass() {
+    return (
+      `
+        ${styles.box}
+        ${styles.tickCover}
+        ${this.checked() && styles.tickCoverChecked}
+      `
+    );
+  }
 
+  renderTick = () => (
+    <svg
+      width="630px"
+      height="630px"
+      viewBox="0 0 630 630"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g
+        stroke="none"
+        strokeWidth="1"
+        fill="none"
+        fillRule="evenodd"
+      >
+        <rect
+          className={styles.box}
+          fill="#8D5687"
+          x="0"
+          y="0"
+          width="630"
+          height="630"
+          rx="8"
+        />
+        <polyline
+          className={styles.tick}
+          stroke="none"
+          strokeWidth="100"
+          points="109 293.646424 229.186565 440 529 152"
+        />
+        <rect
+          className={this.tickCoverClass}
+          fill="#8D5687"
+          x="0"
+          y="0"
+          width="630"
+          height="630"
+          rx="8"
+        />
+      </g>
+    </svg>
+  )
+
+  renderTickBox = () => (
+    <React.Fragment>
+      <input
+        name="completed"
+        type="checkbox"
+        onChange={this.toggle}
+        checked={this.checked()}
+      />
+      {this.renderTick()}
+    </React.Fragment>
+  )
+
+  renderButton = () => (
+    <React.Fragment>
+      <Button className={styles.button}>
+        <p className={styles.buttonText}>
+          {this.checked() ? 'Uncomplete Goal' : 'Complete Goal' }
+        </p>
+
+        {this.renderTick()}
+      </Button>
+    </React.Fragment>
+  )
+
+  render() {
+    const tickBoxStyles = `
+      ${styles.tickBox}
+      ${!this.checked() && this.props.button && styles.hideTick}
+      ${this.props.className}
+    `
     return (
       <LoadingAndErrorHandler
         loading={false}
         error={this.props.error}
       >
-        <div className={styles.tickBox} onClick={this.toggle}>
-          <input
-            name="completed"
-            type="checkbox"
-            onChange={this.toggle}
-            checked={this.checked()}
-          />
-
-          <svg
-            width="630px"
-            height="630px"
-            viewBox="0 0 630 630"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g
-              stroke="none"
-              strokeWidth="1"
-              fill="none"
-              fillRule="evenodd"
-            >
-              <rect
-                className={styles.box}
-                fill="#8D5687"
-                x="0"
-                y="0"
-                width="630"
-                height="630"
-                rx="8"
-              />
-              <polyline
-                className={styles.tick}
-                stroke="none"
-                strokeWidth="100"
-                points="109 293.646424 229.186565 440 529 152"
-              />
-              <rect
-                className={tickCoverClass}
-                fill="#8D5687"
-                x="0"
-                y="0"
-                width="630"
-                height="630"
-                rx="8"
-              />
-            </g>
-          </svg>
+        <div
+          className={tickBoxStyles}
+          onClick={this.toggle}
+        >
+          {this.props.button ? this.renderButton() : this.renderTickBox()}
         </div>
       </LoadingAndErrorHandler>
     );
@@ -143,8 +177,14 @@ Completion.propTypes = {
   auth: AuthModel.isRequired,
   createCompletion: PropTypes.func.isRequired,
   goal: GoalModel.isRequired,
-  selectedDate: PropTypes.string.isRequired
+  selectedDate: PropTypes.string.isRequired,
+  button: PropTypes.bool,
+  className: PropTypes.string
 };
+
+Completion.defaultProps = {
+  button: false
+}
 
 export { Completion };
 
@@ -168,6 +208,8 @@ class CompletionWrapped extends Component {
                           auth={auth}
                           goal={this.props.goal}
                           selectedDate={selectedDate}
+                          button={this.props.button}
+                          className={this.props.className}
                         />
                       )}
                     </Mutation>
@@ -183,7 +225,9 @@ class CompletionWrapped extends Component {
 }
 
 CompletionWrapped.propTypes = {
-  goal: GoalModel
+  goal: GoalModel,
+  button: PropTypes.bool,
+  className: PropTypes.string
 };
 
 export default CompletionWrapped;

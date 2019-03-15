@@ -8,27 +8,37 @@
   margin-bottom: 20px;
 }
 
-.completionContainer {
-  align-items: center;
+.controls {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.completionContainer > label {
-  margin-right: 10px;
-}
-
-.deleteGoalContainer {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 60px;
-}
-
-.newGoalButtonContainer {
-  margin-left: 10px;
+.spacer {
+  width: 10px;
 }
 
 .newGoalButton {
   background-color: var(--green);
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+  }
+
+  .spacer {
+    width: 0;
+    height: 10px;
+  }
+
+  .completion button {
+    justify-content: center;
+  }
+
+  .completion p {
+    margin-left: 7px;
+  }
 }

@@ -18,6 +18,10 @@
   stroke: var(--light-grey);
 }
 
+.hideTick svg{
+  width: 0;
+}
+
 .box {
   fill: var(--charcoal);
 }
@@ -33,4 +37,15 @@
 
 .tickCoverChecked {
   transform: translate(1000px);
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 2px 8px 2px 12px;
+}
+
+.buttonText {
+  margin-right: 7px;
 }

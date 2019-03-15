@@ -16,7 +16,7 @@ class Button extends Component {
 }
 
 Button.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   className: PropTypes.string,
   children: PropTypes.node
 }

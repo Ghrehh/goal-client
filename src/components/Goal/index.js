@@ -38,22 +38,19 @@ class Goal extends Component {
     return (
       <div className={styles.goal} key={goal.id}>
         <h1 className={styles.title}>{goal.name}</h1>
-        <div className={styles.completionContainer}>
-          <label htmlFor='completed'>Goal Completed</label>
-          <Completion goal={goal} />
-        </div>
+        <div className={styles.controls}>
+          <Completion goal={goal} button={true} className={styles.completion}/>
+          <div className={styles.spacer} />
 
-        <div className={styles.deleteGoalContainer}>
-          <DeleteGoal goalId={goal.id} />
-
-          <Link
-            className={styles.newGoalButtonContainer}
-            to={`/goals/${goal.id}/new-note`}
-          >
+          <Link to={`/goals/${goal.id}/new-note`}>
             <Button className={styles.newGoalButton}>
-              New Goal
+              New Note
             </Button>
           </Link>
+
+          <div className={styles.spacer} />
+
+          <DeleteGoal goalId={goal.id} />
         </div>
 
         <Notes goalId={goal.id} />
