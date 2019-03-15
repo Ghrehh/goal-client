@@ -9,13 +9,21 @@
 
 .note {
   background-color: var(--light-grey);
-  margin-bottom: 10px;
-  padding: 14px;
+  margin-bottom: 14px;
+  padding: 14px 14px 25px;
   border-radius: 2px;
+}
+
+.noteHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--grey);
+  padding: 0 0 10px;
 }
 
 .date {
   color: var(--grey);
   font-size: 13px;
-  margin-bottom: 5px;
+  margin-right: auto;
 }

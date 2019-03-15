@@ -5,6 +5,7 @@ import client from 'client';
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import NotesModel from 'models/Notes';
+import DeleteNote from 'components/Goal/Notes/Delete';
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import styles from './styles.module.css';
@@ -23,7 +24,10 @@ class Notes extends Component {
   renderNotes() {
     return this.props.notes.map(note => (
       <div key={note.id} className={styles.note}>
-        <p className={styles.date}>{note.date}</p>
+        <div className={styles.noteHeader}>
+          <p className={styles.date}>{note.date}</p>
+          <DeleteNote noteId={note.id} goalId={this.props.goalId}/>
+        </div>
         <p className={styles.body}>{note.body}</p>
       </div>
     ))
@@ -47,7 +51,8 @@ class Notes extends Component {
 Notes.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.object,
-  notes: NotesModel.isRequired
+  notes: NotesModel.isRequired,
+  goalId: PropTypes.number.isRequired
 }
 
 export { Notes };
@@ -70,6 +75,7 @@ class NotesWrapped extends Component {
                   loading={loading}
                   error={error}
                   notes={(data && data.notes) || []}
+                  goalId={this.props.goalId}
                 />
               )}
             </Query>
