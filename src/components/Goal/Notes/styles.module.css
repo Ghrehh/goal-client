@@ -1,0 +1,21 @@
+.notes {
+  margin-bottom: 50px;
+}
+
+.header {
+  margin-bottom: 10px;
+  text-size: 22px;
+}
+
+.note {
+  background-color: var(--light-grey);
+  margin-bottom: 10px;
+  padding: 14px;
+  border-radius: 2px;
+}
+
+.date {
+  color: var(--grey);
+  font-size: 13px;
+  margin-bottom: 5px;
+}

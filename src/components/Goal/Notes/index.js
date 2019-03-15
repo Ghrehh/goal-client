@@ -7,6 +7,7 @@ import gql from "graphql-tag";
 import NotesModel from 'models/Notes';
 import AuthContext from 'components/context/Auth';
 import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
+import styles from './styles.module.css';
 
 export const NOTES_QUERY = gql`
   query Notes($auth: AuthInput!, $goalId: Int!){
@@ -21,9 +22,9 @@ export const NOTES_QUERY = gql`
 class Notes extends Component {
   renderNotes() {
     return this.props.notes.map(note => (
-      <div key={note.id}>
-        <p>Date: {note.date}</p>
-        <p>Body: {note.body}</p>
+      <div key={note.id} className={styles.note}>
+        <p className={styles.date}>{note.date}</p>
+        <p className={styles.body}>{note.body}</p>
       </div>
     ))
   }
@@ -34,7 +35,10 @@ class Notes extends Component {
         loading={this.props.loading}
         error={this.props.error}
       >
-        {this.renderNotes()}
+        <div className={styles.notes}>
+          <h2 className={styles.header}>Notes</h2>
+          {this.renderNotes()}
+        </div>
       </LoadingAndErrorHandler>
     );
   }
