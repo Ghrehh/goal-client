@@ -8,7 +8,6 @@ import AuthContext from "components/context/Auth";
 import SelectedDateContext from "components/context/SelectedDate";
 import Button from "components/Button";
 import LoadingAndErrorHandler from "components/LoadingAndErrorHandler";
-import AuthModel from "models/Auth";
 import GoalModel, { goalCompletionForDate } from "models/Goal";
 import Tick from './Tick';
 import styles from "./styles.module.css";
@@ -45,72 +44,37 @@ const DELETE_COMPLETION_MUTATION = gql`
 `;
 
 export class Completion extends Component {
-  completion = () =>
-    goalCompletionForDate({
-      goal: this.props.goal,
-      dateString: this.props.selectedDate
-    });
-
-  checked = () => !!this.completion();
-
-  toggle = event => {
-    event.preventDefault();
-
-    if (!this.checked()) {
-      return this.props.createCompletion({
-        variables: {
-          auth: this.props.auth,
-          completedAt: new Date(this.props.selectedDate).toISOString(),
-          goalId: this.props.goal.id
-        }
-      });
-    }
-
-    this.props.deleteCompletion({
-      variables: {
-        auth: this.props.auth,
-        completionId: this.completion().id
-      }
-    });
-  };
-
   renderTickBox = () => (
     <React.Fragment>
       <input
         name="completed"
         type="checkbox"
-        onChange={this.toggle}
-        checked={this.checked()}
+        checked={this.props.checked}
+        onChange={this.props.onClick}
       />
-      <Tick checked={this.checked()} />
+      <Tick checked={this.props.checked} />
     </React.Fragment>
   )
 
   renderButton = () => (
-    <React.Fragment>
-      <Button className={styles.button}>
-        <p className={styles.buttonText}> {this.checked() ? 'Uncomplete Goal' : 'Complete Goal' }
-        </p>
+    <Button className={styles.button}>
+      <p className={styles.buttonText}>
+        {this.props.checked ? 'Uncomplete Goal' : 'Complete Goal' }
+      </p>
 
-        <Tick checked={this.checked()} />
-      </Button>
-    </React.Fragment>
+      <Tick checked={this.props.checked} />
+    </Button>
   )
 
   render() {
-    const tickBoxStyles = `
-      ${styles.tickBox}
-      ${!this.checked() && this.props.button && styles.hideTick}
-      ${this.props.className}
-    `
     return (
       <LoadingAndErrorHandler
         loading={false}
         error={this.props.error}
       >
         <div
-          className={tickBoxStyles}
-          onClick={this.toggle}
+          className={`${styles.tickBox} ${this.props.className}`}
+          onClick={this.props.loading ? () => {} : this.props.onClick}
         >
           {this.props.button ? this.renderButton() : this.renderTickBox()}
         </div>
@@ -122,10 +86,8 @@ export class Completion extends Component {
 Completion.propTypes = {
   loading: PropTypes.bool.isRequired,
   error: PropTypes.object,
-  auth: AuthModel.isRequired,
-  createCompletion: PropTypes.func.isRequired,
-  goal: GoalModel.isRequired,
-  selectedDate: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  checked: PropTypes.bool.isRequired,
   button: PropTypes.bool,
   className: PropTypes.string
 };
@@ -143,21 +105,50 @@ export default class CompletionWrapped extends Component {
             {auth => (
               <ApolloProvider client={client}>
                 <Mutation mutation={CREATE_COMPLETION_MUTATION}>
-                  {(createCompletion, create) => (
+                  {(createCompletion, createPayload) => (
                     <Mutation mutation={DELETE_COMPLETION_MUTATION}>
-                      {(deleteCompletion, remove) => (
-                        <Completion
-                          loading={create.loading || remove.loading}
-                          error={create.error || remove.error}
-                          createCompletion={createCompletion}
-                          deleteCompletion={deleteCompletion}
-                          auth={auth}
-                          goal={this.props.goal}
-                          selectedDate={selectedDate}
-                          button={this.props.button}
-                          className={this.props.className}
-                        />
-                      )}
+                      {(deleteCompletion, deletePayload) => {
+                        const completion = goalCompletionForDate({
+                          goal: this.props.goal,
+                          dateString: selectedDate
+                        });
+
+                        const checked = !!completion;
+
+                        const create = event => {
+                          event.preventDefault();
+
+                          createCompletion({
+                            variables: {
+                              auth,
+                              completedAt: new Date(selectedDate).toISOString(),
+                              goalId: this.props.goal.id
+                            }
+                          });
+                        };
+
+                        const remove = event => {
+                          event.preventDefault();
+
+                          deleteCompletion({
+                            variables: {
+                              auth,
+                              completionId: completion.id
+                            }
+                          });
+                        };
+
+                        return (
+                          <Completion
+                            loading={createPayload.loading || deletePayload.loading}
+                            error={createPayload.error || deletePayload.error}
+                            onClick={checked ? remove : create }
+                            checked={checked}
+                            button={this.props.button}
+                            className={this.props.className}
+                          />
+                        )
+                      }}
                     </Mutation>
                   )}
                 </Mutation>
