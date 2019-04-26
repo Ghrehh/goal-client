@@ -43,7 +43,7 @@ const DELETE_COMPLETION_MUTATION = gql`
   }
 `;
 
-class Completion extends Component {
+export class Completion extends Component {
   completion = () =>
     goalCompletionForDate({
       goal: this.props.goal,
@@ -140,8 +140,7 @@ class Completion extends Component {
   renderButton = () => (
     <React.Fragment>
       <Button className={styles.button}>
-        <p className={styles.buttonText}>
-          {this.checked() ? 'Uncomplete Goal' : 'Complete Goal' }
+        <p className={styles.buttonText}> {this.checked() ? 'Uncomplete Goal' : 'Complete Goal' }
         </p>
 
         {this.renderTick()}
@@ -186,9 +185,7 @@ Completion.defaultProps = {
   button: false
 }
 
-export { Completion };
-
-class CompletionWrapped extends Component {
+export default class CompletionWrapped extends Component {
   render() {
     return (
       <SelectedDateContext.Consumer>
@@ -229,5 +226,3 @@ CompletionWrapped.propTypes = {
   button: PropTypes.bool,
   className: PropTypes.string
 };
-
-export default CompletionWrapped;

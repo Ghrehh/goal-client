@@ -21,7 +21,9 @@
     "start": "NODE_PATH=./src react-scripts start",
     "build": "REACT_APP_BACKEND_URL=https://goal-backend.herokuapp.com NODE_PATH=./src react-scripts build",
     "test": "NODE_PATH=./src react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "NODE_PATH=./src start-storybook -p 6006",
+    "build-storybook": "NODE_PATH=./src build-storybook"
   },
   "browserslist": [
     ">0.2%",
@@ -31,6 +33,12 @@
   ],
   "devDependencies": {
     "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.9.1"
+    "enzyme-adapter-react-16": "^1.9.1",
+    "@storybook/react": "^5.0.10",
+    "@storybook/addon-actions": "^5.0.10",
+    "@storybook/addon-links": "^5.0.10",
+    "@storybook/addons": "^5.0.10",
+    "@babel/core": "^7.4.3",
+    "babel-loader": "^8.0.5"
   }
 }
