@@ -10,6 +10,7 @@ import Button from "components/Button";
 import LoadingAndErrorHandler from "components/LoadingAndErrorHandler";
 import AuthModel from "models/Auth";
 import GoalModel, { goalCompletionForDate } from "models/Goal";
+import Tick from './Tick';
 import styles from "./styles.module.css";
 
 const CREATE_COMPLETION_MUTATION = gql`
@@ -73,58 +74,6 @@ export class Completion extends Component {
     });
   };
 
-  get tickCoverClass() {
-    return (
-      `
-        ${styles.box}
-        ${styles.tickCover}
-        ${this.checked() && styles.tickCoverChecked}
-      `
-    );
-  }
-
-  renderTick = () => (
-    <svg
-      width="630px"
-      height="630px"
-      viewBox="0 0 630 630"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g
-        stroke="none"
-        strokeWidth="1"
-        fill="none"
-        fillRule="evenodd"
-      >
-        <rect
-          className={styles.box}
-          fill="#8D5687"
-          x="0"
-          y="0"
-          width="630"
-          height="630"
-          rx="8"
-        />
-        <polyline
-          className={styles.tick}
-          stroke="none"
-          strokeWidth="100"
-          points="109 293.646424 229.186565 440 529 152"
-        />
-        <rect
-          className={this.tickCoverClass}
-          fill="#8D5687"
-          x="0"
-          y="0"
-          width="630"
-          height="630"
-          rx="8"
-        />
-      </g>
-    </svg>
-  )
-
   renderTickBox = () => (
     <React.Fragment>
       <input
@@ -133,7 +82,7 @@ export class Completion extends Component {
         onChange={this.toggle}
         checked={this.checked()}
       />
-      {this.renderTick()}
+      <Tick checked={this.checked()} />
     </React.Fragment>
   )
 
@@ -143,7 +92,7 @@ export class Completion extends Component {
         <p className={styles.buttonText}> {this.checked() ? 'Uncomplete Goal' : 'Complete Goal' }
         </p>
 
-        {this.renderTick()}
+        <Tick checked={this.checked()} />
       </Button>
     </React.Fragment>
   )

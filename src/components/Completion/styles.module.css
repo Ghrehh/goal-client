@@ -9,34 +9,8 @@
   pointer-events: none;
 }
 
-.tickBox svg {
-  width: 35px;
-  height: 35px;
-}
-
-.tick {
-  stroke: var(--light-grey);
-}
-
-.hideTick svg{
-  width: 0;
-}
-
-.box {
-  fill: var(--charcoal);
-}
-
 .tickBox:hover {
   filter: brightness(1.5);
-}
-
-.tickCover {
-  transform: translate(0px);
-  transition: transform 0.4s;
-}
-
-.tickCoverChecked {
-  transform: translate(1000px);
 }
 
 .button {
