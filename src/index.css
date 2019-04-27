@@ -1,4 +1,5 @@
 :root {
+  --off-white: #f9f9f9;
   --charcoal: #323131;
   --grey: #c7c6c6;
   --light-grey: #f2f2f2;
@@ -20,5 +21,6 @@ body {
   box-sizing: border-box;
   min-height: 100vh;
   color: var(--charcoal);
+  background-color: var(--off-white);
   font-family: var(--main-font);
 }
