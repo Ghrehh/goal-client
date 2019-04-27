@@ -35,7 +35,6 @@ export default class Tick extends PureComponent {
             y="0"
             width="630"
             height="630"
-            rx="50"
           />
           <polyline
             className={styles.tick}
@@ -50,7 +49,12 @@ export default class Tick extends PureComponent {
             y="0"
             width="630"
             height="630"
-            rx="50"
+          />
+          <polyline
+            className={`${styles.ghostTick} ${styles.tick}`}
+            stroke="none"
+            strokeWidth="100"
+            points="109 293.646424 229.186565 440 529 152"
           />
         </g>
       </svg>

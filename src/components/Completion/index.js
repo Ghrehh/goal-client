@@ -12,37 +12,6 @@ import GoalModel, { goalCompletionForDate } from "models/Goal";
 import Tick from './Tick';
 import styles from "./styles.module.css";
 
-const CREATE_COMPLETION_MUTATION = gql`
-  mutation CreateCompletion(
-    $auth: AuthInput!
-    $goalId: Int!
-    $completedAt: ISO8601DateTime!
-  ) {
-    createCompletion(auth: $auth, goalId: $goalId, completedAt: $completedAt) {
-      goals {
-        id
-        completions {
-          completedAt
-          id
-        }
-      }
-    }
-  }
-`;
-
-const DELETE_COMPLETION_MUTATION = gql`
-  mutation DeleteCompletion($auth: AuthInput!, $completionId: Int!) {
-    deleteCompletion(auth: $auth, completionId: $completionId) {
-      goals {
-        id
-        completions {
-          id
-        }
-      }
-    }
-  }
-`;
-
 export class Completion extends Component {
   renderTickBox = () => (
     <React.Fragment>
@@ -95,6 +64,38 @@ Completion.propTypes = {
 Completion.defaultProps = {
   button: false
 }
+
+const CREATE_COMPLETION_MUTATION = gql`
+  mutation CreateCompletion(
+    $auth: AuthInput!
+    $goalId: Int!
+    $completedAt: ISO8601DateTime!
+  ) {
+    createCompletion(auth: $auth, goalId: $goalId, completedAt: $completedAt) {
+      goals {
+        id
+        completions {
+          completedAt
+          id
+        }
+      }
+    }
+  }
+`;
+
+const DELETE_COMPLETION_MUTATION = gql`
+  mutation DeleteCompletion($auth: AuthInput!, $completionId: Int!) {
+    deleteCompletion(auth: $auth, completionId: $completionId) {
+      goals {
+        id
+        completions {
+          id
+        }
+      }
+    }
+  }
+`;
+
 
 export default class CompletionWrapped extends Component {
   render() {

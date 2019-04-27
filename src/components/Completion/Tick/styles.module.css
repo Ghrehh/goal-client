@@ -18,3 +18,7 @@
 .tickCoverChecked {
   transform: translate(1000px);
 }
+
+.ghostTick {
+  opacity: 0.07
+}
