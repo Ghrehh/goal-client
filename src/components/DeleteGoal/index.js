@@ -10,6 +10,7 @@ import LoadingAndErrorHandler from 'components/LoadingAndErrorHandler';
 import AuthModel from 'models/Auth';
 import { Redirect } from 'react-router';
 import Button from 'components/Button';
+import ConfirmationModal from 'components/modals/Confirmation';
 import styles from './styles.module.css';
 
 const DELETE_GOAL_MUTATION = gql`
@@ -23,6 +24,10 @@ const DELETE_GOAL_MUTATION = gql`
 `;
 
 class Delete extends Component {
+  state = {
+    modalOpen: false
+  }
+
   handleDelete = () => {
     this.props.deleteGoal({
       variables: {
@@ -30,6 +35,18 @@ class Delete extends Component {
         goalId: this.props.goalId
       }
     });
+  }
+
+  renderConfirmationModal = () => {
+    if (!this.state.modalOpen) return null;
+
+    return (
+      <ConfirmationModal
+        text='Are you sure want to delete this goal?'
+        onConfirm={this.handleDelete}
+        onCancel={() => this.setState({ modalOpen: false })}
+      />
+    )
   }
 
   render() {
@@ -43,11 +60,13 @@ class Delete extends Component {
         error={this.props.error}
       >
         <Button
-          onClick={this.handleDelete}
+          onClick={() => this.setState({ modalOpen: true })}
           className={styles.button}
         >
           Delete Goal
         </Button>
+
+        {this.renderConfirmationModal()}
       </LoadingAndErrorHandler>
     );
   }

@@ -1,7 +1,8 @@
 import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow'
+import ConfirmationModal from 'components/modals/Confirmation';
 import { Delete } from '../';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 describe('Delete', () => {
   let testContext = {};
@@ -34,15 +35,42 @@ describe('Delete', () => {
     });
   });
 
-  describe('deleting', () => {
+  describe('clicking the delete button', () => {
     beforeEach(() => {
-      const wrapper = mount(testContext.component);
-      wrapper.simulate('click');
+      testContext.wrapper = mount(testContext.component);
+      testContext.wrapper.simulate('click');
     });
 
-    it('calls the delete goal mock with the correct arguments', () => {
-      expect(testContext.deleteGoalMock).toBeCalledWith({
-        variables: { goalId: 1, auth: testContext.auth }
+    it('renders the delete confirmation modal', () => {
+      expect(testContext.wrapper.find(ConfirmationModal).length).toEqual(1);
+    });
+  });
+
+  describe('confirmation modal', () => {
+    beforeEach(() => {
+      testContext.wrapper = mount(testContext.component);
+      testContext.wrapper.setState({ modalOpen: true });
+    });
+
+    describe('confirm', () => {
+      beforeEach(() => {
+        testContext.wrapper.find(ConfirmationModal).props().onConfirm()
+      });
+
+      it('calls the delete goal mock with the correct arguments', () => {
+        expect(testContext.deleteGoalMock).toBeCalledWith({
+          variables: { goalId: 1, auth: testContext.auth }
+        });
+      });
+    });
+
+    describe('cancel', () => {
+      beforeEach(() => {
+        testContext.wrapper.find(ConfirmationModal).props().onCancel()
+      });
+
+      it('closes the confirmation modal', () => {
+        expect(testContext.wrapper.state().modalOpen).toEqual(false);
       });
     });
   });
