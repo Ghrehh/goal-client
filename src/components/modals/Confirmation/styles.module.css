@@ -1,0 +1,12 @@
+.text {
+  margin-bottom: 15px;
+}
+
+.confirm {
+  background-color: var(--confirm);
+  margin-right: 10px;
+}
+
+.cancel {
+  background-color: var(--danger);
+}

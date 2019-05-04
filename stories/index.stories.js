@@ -5,6 +5,7 @@ import { withKnobs, boolean } from '@storybook/addon-knobs'
 
 import { Button, Welcome } from '@storybook/react/demo';
 import { Completion } from 'components/Completion';
+import ConfirmationModal from 'components/modals/Confirmation';
 
 import 'reset-css';
 import 'index.css';
@@ -27,4 +28,14 @@ storiesOf('Completion', module)
         button={boolean('button', false)}
       />
     </Padding>
+  ));
+
+storiesOf('Confirmation Modal', module)
+  .addDecorator(withKnobs)
+  .add('Base', () => (
+    <ConfirmationModal
+      onConfirm={() => {}}
+      onCancel={() => {}}
+      text='foo'
+    />
   ));
