@@ -50,6 +50,14 @@ class Goal extends Component {
 
           <div className={styles.spacer} />
 
+          <Link to={`/edit-goal/${goal.id}`}>
+            <Button className={styles.editGoalButton}>
+              Edit
+            </Button>
+          </Link>
+
+          <div className={styles.spacer} />
+
           <DeleteGoal goalId={goal.id} />
         </div>
 
